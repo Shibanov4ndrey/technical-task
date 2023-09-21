@@ -1,0 +1,106 @@
+@import "../../styles";
+
+.comment {
+  @include flex($direction: row);
+  text-align: start;
+}
+
+.avatarContainer {
+  @include flex($direction: row);
+  width: 100%;
+  gap: 20px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  @media (min-width: 768px) {
+    width: 68px;
+    height: 68px;
+  }
+}
+
+.textContainer {
+  @include flex($direction: column);
+  width: calc(100% - 60px);
+  gap: 9.5px;
+
+  @media (min-width: 768px) {
+    width: calc(100% - 88px);
+    gap: 12.5px;
+  }
+}
+
+
+.likesContainer {
+  @include flex($direction: row, $justify: space-between);
+}
+
+.authorContainer {
+  @include flex($direction: column);
+  gap: 0;
+
+  @media (min-width: 768px) {
+    gap: 4px;
+  }
+}
+
+
+.author {
+  color: $white;
+  @include size14-2;
+
+  @media (min-width: 768px) {
+    @include size16-1;
+    font-size: 16px;
+  }
+}
+
+.date {
+  color: $date;
+  @include size14-3;
+
+  @media (min-width: 768px) {
+    @include size16-3;
+    font-size: 16px;
+  }
+}
+
+.likes {
+  @include flex($direction: row, $align: center);
+  gap: 8px;
+  color: $white;
+  @include size14-1;
+  cursor: pointer;
+
+  @media (min-width: 768px) {
+    @include size15-1;
+  }
+}
+
+.svg {
+  width: 20px;
+  height: 20px;
+
+  @media (min-width: 768px) {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.likesCount {
+  user-select: none;
+}
+
+.text {
+  color: $white;
+  @include size14-3;
+  white-space: pre-line;
+
+  @media (min-width: 768px) {
+    @include size16-3;
+  }
+}

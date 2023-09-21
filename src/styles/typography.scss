@@ -1,0 +1,69 @@
+@mixin base-typography() {
+  font-family: Lato;
+  font-style: normal;
+}
+
+@mixin typography-enhancer($weight, $style) {
+  @if $weight {
+    font-weight: $weight;
+  }
+  @if $style {
+    font-style: $style;
+  }
+}
+
+@mixin size14-1($weight: null, $style: null) {
+  @include base-typography;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 150%;
+  @include typography-enhancer($weight, $style);
+}
+
+@mixin size14-2($weight: null, $style: null) {
+  @include base-typography;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 22px;
+  @include typography-enhancer($weight, $style);
+}
+
+@mixin size14-3($weight: null, $style: null) {
+  @include base-typography;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  @include typography-enhancer($weight, $style);
+}
+
+@mixin size15-1($weight: null, $style: null) {
+  @include base-typography;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 150%;
+  @include typography-enhancer($weight, $style);
+}
+
+@mixin size16-1($weight: null, $style: null) {
+  @include base-typography;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+  @include typography-enhancer($weight, $style);
+}
+
+@mixin size16-2($weight: null, $style: null) {
+  @include base-typography;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  @include typography-enhancer($weight, $style);
+}
+
+@mixin size16-3($weight: null, $style: null) {
+  @include base-typography;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  @include typography-enhancer($weight, $style);
+}

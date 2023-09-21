@@ -1,0 +1,12 @@
+@import "./styles";
+
+.app {
+  text-align: center;
+  background-image: url("assets/background.png");
+  background-position: center center;
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}

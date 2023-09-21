@@ -1,0 +1,48 @@
+@import "../../styles";
+
+.mediaCounter {
+  @include flex($direction: row, $justify: space-between);
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.commentsCounter {
+  color: $white;
+  @include size14-2;
+  @media (min-width: 768px) {
+    @include size16-2;
+  }
+}
+
+.likesCounter {
+  @include flex($direction: row, $align: center);
+  gap: 8px;
+  color: $white;
+  @include size14-1;
+
+  @media (min-width: 768px) {
+    @include size15-1;
+  }
+}
+
+.svg {
+  width: 20px;
+  height: 20px;
+
+  @media (min-width: 768px) {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.hr {
+  width: 100%;
+  border: 0.2px solid $neutral-neutral-30;
+  margin-bottom: 24px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 32px;
+  }
+}
+
+

@@ -1,0 +1,15 @@
+@import "../../styles";
+
+.wrapper {
+  @include flex($direction: column, $align: center);
+  padding: 52px 24px 64px;
+
+  @media (min-width: 768px) {
+    padding: 52px 104px 64px;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 52px 402px 64px;
+  }
+}
+

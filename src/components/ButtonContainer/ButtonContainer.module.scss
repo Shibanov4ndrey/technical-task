@@ -1,0 +1,20 @@
+@import "../../styles";
+
+.buttonContainer {
+  @include flex($direction: column, $align: center);
+  gap: 32px;
+  margin-top: 60px;
+}
+
+.button {
+  border-radius: 4px;
+  background: $button;
+  backdrop-filter: blur(13.5px);
+  width: 234px;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  color: $white;
+  text-align: center;
+  @include size16-2;
+}

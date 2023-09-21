@@ -1,0 +1,31 @@
+@import "../../styles";
+
+.comments {
+  @include flex($direction: column);
+  width: 100%;
+  gap: 24px;
+
+  @media (min-width: 768px) {
+    gap: 32px;
+  }
+}
+
+.childrenCommentContainer {
+  @include flex($direction: column);
+  gap: 24px;
+
+  @media (min-width: 768px) {
+    gap: 32px;
+  }
+}
+
+.childrenComments {
+  @include flex($direction: column);
+  margin-left: 20px;
+  gap: 24px;
+
+  @media (min-width: 768px) {
+    margin-left: 34px;
+    gap: 32px;
+  }
+}

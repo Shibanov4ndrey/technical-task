@@ -1,0 +1,17 @@
+@import "../../assets/styles";
+
+.likes {
+  @include flex($direction: row, $align: center);
+  gap: 8px;
+  color: $white;
+  @include size14-1;
+  cursor: pointer;
+
+  @media (min-width: 768px) {
+    @include size15-1;
+  }
+}
+
+.likesCount {
+  user-select: none;
+}

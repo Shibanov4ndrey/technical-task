@@ -3,7 +3,6 @@ import { ru } from 'date-fns/locale';
 import { DATE_FORMAT } from '../const';
 import { IAuthor, IComment, ICommentWithChildren } from '../types/types';
 
-
 export const getCommentsWithChildren = (comments: IComment[]): ICommentWithChildren[] => {
   const commentsWithChildren: ICommentWithChildren[] = [];
   let pid: number | undefined;
@@ -33,10 +32,10 @@ export const getCommentsWithChildren = (comments: IComment[]): ICommentWithChild
   return commentsWithChildren;
 };
 
-
-export const getDate = (date: Date) => {
+export const getDate = (date: string) => {
   const today = new Date();
-  const timeDiff = Math.abs(today.getTime() - date.getTime());
+  const currentDate = new Date(date);
+  const timeDiff = Math.abs(today.getTime() - currentDate.getTime());
   const diffDays = Math.round(timeDiff / (1000 * 3600));
   if (diffDays === 1) {
     return `${diffDays} час назад`;
@@ -44,7 +43,7 @@ export const getDate = (date: Date) => {
   if (diffDays <= 3) {
     return `${diffDays} часа назад`;
   }
-  return format(new Date(date), DATE_FORMAT.FULL_DATE_AND_TIME, { locale: ru });
+  return format(currentDate, DATE_FORMAT.FULL_DATE_AND_TIME, { locale: ru });
 };
 
 export const getAuthor = (authors: IAuthor[], comment: IComment) => authors.find((author) => author.id === comment.author);

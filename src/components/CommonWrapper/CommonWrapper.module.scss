@@ -1,4 +1,4 @@
-@import "../../styles";
+@import "../../assets/styles";
 
 .wrapper {
   @include flex($direction: column, $align: center);

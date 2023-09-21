@@ -1,4 +1,4 @@
-@import "../../styles";
+@import "../../assets/styles";
 
 .buttonContainer {
   @include flex($direction: column, $align: center);

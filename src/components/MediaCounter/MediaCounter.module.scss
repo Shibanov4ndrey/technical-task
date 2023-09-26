@@ -45,4 +45,9 @@
   }
 }
 
+.loader {
+  width: 100%;
+  @include flex($justify: center);
+}
+
 

@@ -1,20 +1,25 @@
 import React from 'react';
 import { LikeDisableIcon } from '../../assets/svg';
+import Loader from '../Loader';
 import style from './MediaCounter.module.scss';
 
 export interface IProps {
   likesCount: number;
-  commentsCounter: number;
+  commentsCount: number;
+  isLoadingCount: boolean;
 }
 
-const MediaCounter = ({ likesCount, commentsCounter }: IProps) => <>
+const MediaCounter = ({ likesCount, commentsCount, isLoadingCount }: IProps) => <>
   <div className={style.mediaCounter}>
-    <div className={style.commentsCounter}>{commentsCounter} комментариев
-    </div>
-    <div className={style.likesCounter}>
-      <LikeDisableIcon className={style.svg}/>
-      {likesCount}
-    </div>
+    {isLoadingCount
+      ? <div className={style.loader}><Loader/></div>
+      : <>
+        <div className={style.commentsCounter}>{commentsCount} комментариев</div>
+        <div className={style.likesCounter}>
+          <LikeDisableIcon className={style.svg}/>
+          {likesCount}
+        </div>
+      </>}
   </div>
   <hr className={style.hr}/>
 </>;

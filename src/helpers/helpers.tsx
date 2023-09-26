@@ -62,6 +62,22 @@ export const recursionMap = (comments: ICommentWithChildren[], currentComment: I
   });
 };
 
+export const getLikedComments = (comments: ICommentWithChildren[], currentComment: ICommentWithChildren): ICommentWithChildren[] => {
+  const filter: ICommentWithChildren[] = []
+  comments.forEach((comment) => {
+    const isFiltered = (comment.isLiked && comment.id !== currentComment.id) || (currentComment.id === comment.id && !currentComment.isLiked)
+    if (comment.children.length > 0) {
+      filter.push(...getLikedComments(comment.children, currentComment))
+    }
+    if (isFiltered) {
+      filter.push(comment)
+      return
+    }
+    return
+  })
+  return filter
+};
+
 export const getAmount = (comments: ICommentWithChildren[]): number => {
   return comments.reduce((sum, comment) => {
     if (comment.children.length > 0) {

@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import getAuthorsRequest from '../api/authors/getAuthorsRequest';
 import getCommentsRequest from '../api/comments/getCommentsRequest';
-import { getCommentsData, getAmount, recursionMap } from '../helpers/helpers';
+import {
+  getCommentsData,
+  recursionMap,
+  getLikedComments,
+} from '../helpers/helpers';
 import { IAuthor, ICommentWithChildren } from '../types/types';
 
 const useViewController = () => {
@@ -27,7 +31,7 @@ const useViewController = () => {
 
   useEffect(() => {
     if (authors.length && comments.length) {
-      setCommentsData(getCommentsData( comments, authors));
+      setCommentsData(getCommentsData(comments, authors));
     }
   }, [authors]);
 
@@ -48,25 +52,48 @@ const useViewController = () => {
     }
   }, [isLoading]);
 
-  const handleClickLike = (comment: ICommentWithChildren) => {
-    setCommentsData((prev) => [...recursionMap(prev, comment)]);
-  };
-
   const isFetching = page <= totalPage || !totalPage;
 
-  const likesCount = getAmount(commentsData);
-  const commentsCounter = comments.length;
+  const [commentsCount, setCommentsCount] = useState<number>(0);
+  const [likesCount, setLikesCount] = useState<number>(0);
+  const [likedComments, setLikedComments] = useState<number>(0);
+  const [pageCount, setPageCount] = useState<number>(1);
+  const [requestCount, setRequestCount] = useState<number>(1);
+  const [isLoadingCount, setIsLoadingCount] = useState<boolean>(true);
+
+
+  const handleClickLike = (comment: ICommentWithChildren) => {
+    setCommentsData((prev) => [...recursionMap(prev, comment)]);
+    setLikedComments(getLikedComments(commentsData, comment).length)
+  };
+
+  useEffect(() => {
+    if (isLoadingCount) {
+      getCommentsRequest(pageCount)
+        .then(data => {
+          setPageCount(pageCount + 1);
+          setCommentsCount(commentsCount + data.data.length)
+          setLikesCount(likesCount + data.data.reduce((sum, comment) => sum + comment.likes, 0))
+          if (pageCount === data.pagination.total_pages) {
+            setIsLoadingCount(false)
+          }
+        })
+        .catch(() => {
+          setRequestCount(requestCount + 1)
+        })
+    }
+  }, [pageCount, requestCount]);
 
   return {
     isFetching,
     isLoading,
     error,
     commentsData,
-    commentsCounter,
-    likesCount,
     setIsLoading,
-    setCommentsData,
     handleClickLike,
+    commentsCount,
+    likesCount: likesCount + likedComments,
+    isLoadingCount,
   };
 };
 

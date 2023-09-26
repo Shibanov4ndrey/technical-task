@@ -17,22 +17,21 @@ const App = () => {
   const {
     isLoading,
     isFetching,
-    commentsCounter,
-    likesCount,
     error,
     commentsData,
     setIsLoading,
     handleClickLike,
+    commentsCount,
+    likesCount,
+    isLoadingCount,
   } = useViewController();
 
   return (
     <ThemeProvider theme={darkTheme}>
       <div className={style.app}/>
       <CommonWrapper>
-        <MediaCounter
-          likesCount={likesCount}
-          commentsCounter={commentsCounter}
-        />
+        <MediaCounter commentsCount={commentsCount} likesCount={likesCount}
+                      isLoadingCount={isLoadingCount}/>
         <Comments
           handleClickLike={handleClickLike}
           comments={commentsData}

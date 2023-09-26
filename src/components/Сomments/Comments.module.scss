@@ -20,12 +20,9 @@
 }
 
 .childrenComments {
-  @include flex($direction: column);
   margin-left: 20px;
-  gap: 24px;
 
   @media (min-width: 768px) {
     margin-left: 34px;
-    gap: 32px;
   }
 }

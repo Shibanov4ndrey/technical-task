@@ -8,7 +8,10 @@ export interface IComment {
 }
 
 export interface ICommentWithChildren extends IComment {
-  children: IComment[]
+  children: ICommentWithChildren[],
+  avatar: string,
+  isLiked: boolean,
+  media: IAuthor,
 }
 
 export interface IAuthor {
@@ -16,6 +19,7 @@ export interface IAuthor {
   name: string,
   avatar: string
 }
+
 export interface IPagination {
   page: number,
   size: number,

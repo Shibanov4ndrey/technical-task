@@ -1,38 +1,33 @@
 import React from 'react';
-import { IAuthor, IComment, ICommentWithChildren } from '../../types/types';
-import CommentContainer from '../Сomment/СommentContainer';
+import { ICommentWithChildren } from '../../types/types';
+import Comment from '../Сomment/Comment';
 import style from './Comments.module.scss';
 
 export interface IProps {
-  commentsWithChildren: ICommentWithChildren[];
-  authors: IAuthor[];
-  setLikedComments: (comment: IComment[]) => void;
-  likedComments: IComment[];
+  classname?: string;
+  comments: ICommentWithChildren[];
+  handleClickLike: (comment: ICommentWithChildren) => void;
 }
 
-const Comments = ({ commentsWithChildren, authors, setLikedComments, likedComments }: IProps) => <div
+const Comments = ({
+                    classname,
+                    comments,
+                    handleClickLike,
+                  }: IProps) => <div
   className={style.comments}
 >
-  {commentsWithChildren.map((comment) => {
-    const isHasChildren = !!comment.children.length;
+  {comments.map((comment) => {
     return <div key={comment.id} className={style.childrenCommentContainer}>
-      <CommentContainer
+      <Comment
+        handleClickLike={handleClickLike}
+        classname={classname}
         comment={comment}
-        authors={authors}
-        setLikedComments={setLikedComments}
-        likedComments={likedComments}
       />
-      {isHasChildren && <div className={style.childrenComments}>
-        {comment.children.map((children) => {
-          return <CommentContainer
-            key={children.id}
-            setLikedComments={setLikedComments}
-            likedComments={likedComments}
-            comment={children}
-            authors={authors}
-          />;
-        })}
-      </div>}
+      {comment.children.length > 0 && <Comments
+        handleClickLike={handleClickLike}
+        classname={style.childrenComments}
+        comments={comment.children}
+      />}
     </div>;
   })}</div>;
 export default Comments;

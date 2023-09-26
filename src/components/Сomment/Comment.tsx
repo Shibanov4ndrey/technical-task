@@ -1,29 +1,26 @@
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { IAuthor, IComment } from '../../types/types';
+import { ICommentWithChildren } from '../../types/types';
 import { getDate } from '../../helpers/helpers';
 import CounterLikes from '../CounterLikes';
+import classNames from "classnames";
 import style from './Сomment.module.scss';
 
 export interface IProps {
-  comment: IComment;
-  author: IAuthor | undefined;
-  isLiked: boolean;
-  handleClickLike: () => void;
-  likes: number;
+  handleClickLike: (comment: ICommentWithChildren) => void;
+  classname?: string;
+  comment: ICommentWithChildren;
 }
 
 const Comment = ({
+                   classname,
                    comment,
-                   author,
-                   isLiked,
-                   likes,
                    handleClickLike,
                  }: IProps) => <div className={style.comment}>
-  <div className={style.avatarContainer}>
+  <div className={classNames(style.avatarContainer, classname)}>
     <LazyLoadImage
       className={style.avatar}
-      src={author!.avatar}
+      src={comment.media?.avatar}
       width={40}
       height={40}
       alt='avatar'
@@ -32,16 +29,16 @@ const Comment = ({
       <div className={style.likesContainer}>
         <div className={style.authorContainer}>
           <div className={style.author}>
-            {author!.name}
+            {comment.media?.name}
           </div>
           <div className={style.date}>
             {getDate(comment.created)}
           </div>
         </div>
         <CounterLikes
-          isLiked={isLiked}
-          likes={likes}
-          handleClickLike={handleClickLike}
+          isLiked={comment.isLiked}
+          likes={comment.likes}
+          handleClickLike={() => handleClickLike(comment)}
         />
       </div>
       <div className={style.text}>{comment.text}</div>

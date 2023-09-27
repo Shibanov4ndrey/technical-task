@@ -2,11 +2,14 @@
     "name": "technical_task",
     "version": "0.1.0",
     "private": true,
+    "homepage": "https://shibanov4ndrey.github.io/technical-task/",
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "prettier": "prettier --write '*/**/*.{ts,tsx,js,jsx,css,scss,json}'"
+        "prettier": "prettier --write '*/**/*.{ts,tsx,js,jsx,css,scss,json}'",
+        "deploy": "gh-pages -d build",
+        "predeploy": "npm run build"
     },
     "dependencies": {
         "@emotion/react": "^11.11.1",
@@ -59,6 +62,7 @@
     },
     "devDependencies": {
         "@types/lodash": "^4.14.198",
-        "@types/react-lazy-load-image-component": "^1.6.0"
+        "@types/react-lazy-load-image-component": "^1.6.0",
+        "gh-pages": "^6.0.0"
     }
 }

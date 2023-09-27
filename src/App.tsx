@@ -30,8 +30,11 @@ const App = () => {
     <ThemeProvider theme={darkTheme}>
       <div className={style.app}/>
       <CommonWrapper>
-        <MediaCounter commentsCount={commentsCount} likesCount={likesCount}
-                      isLoadingCount={isLoadingCount}/>
+        <MediaCounter
+          commentsCount={commentsCount}
+          likesCount={likesCount}
+          isLoadingCount={isLoadingCount}
+        />
         <Comments
           handleClickLike={handleClickLike}
           comments={commentsData}

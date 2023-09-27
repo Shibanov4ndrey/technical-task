@@ -9,13 +9,19 @@ import {
 import { IAuthor, ICommentWithChildren } from '../types/types';
 
 const useViewController = () => {
-  const [page, setPage] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [totalPage, setTotalPage] = useState<number>(0);
-  const [comments, setComments] = useState<ICommentWithChildren[]>([]);
   const [commentsData, setCommentsData] = useState<ICommentWithChildren[]>([]);
-  const [error, setError] = useState<string>('');
+  const [comments, setComments] = useState<ICommentWithChildren[]>([]);
   const [authors, setAuthors] = useState<IAuthor[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [totalPage, setTotalPage] = useState<number>(0);
+  const [commentsCount, setCommentsCount] = useState<number>(0);
+  const [likesCount, setLikesCount] = useState<number>(0);
+  const [likedComments, setLikedComments] = useState<number>(0);
+  const [pageCount, setPageCount] = useState<number>(1);
+  const [requestCount, setRequestCount] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoadingCount, setIsLoadingCount] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     getAuthorsRequest()
@@ -52,21 +58,6 @@ const useViewController = () => {
     }
   }, [isLoading]);
 
-  const isFetching = page <= totalPage || !totalPage;
-
-  const [commentsCount, setCommentsCount] = useState<number>(0);
-  const [likesCount, setLikesCount] = useState<number>(0);
-  const [likedComments, setLikedComments] = useState<number>(0);
-  const [pageCount, setPageCount] = useState<number>(1);
-  const [requestCount, setRequestCount] = useState<number>(1);
-  const [isLoadingCount, setIsLoadingCount] = useState<boolean>(true);
-
-
-  const handleClickLike = (comment: ICommentWithChildren) => {
-    setCommentsData((prev) => [...recursionMap(prev, comment)]);
-    setLikedComments(getLikedComments(commentsData, comment).length)
-  };
-
   useEffect(() => {
     if (isLoadingCount) {
       getCommentsRequest(pageCount)
@@ -83,6 +74,13 @@ const useViewController = () => {
         })
     }
   }, [pageCount, requestCount]);
+
+  const isFetching = page <= totalPage || !totalPage;
+
+  const handleClickLike = (comment: ICommentWithChildren) => {
+    setCommentsData((prev) => [...recursionMap(prev, comment)]);
+    setLikedComments(getLikedComments(commentsData, comment).length)
+  };
 
   return {
     isFetching,
